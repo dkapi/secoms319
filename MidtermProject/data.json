@@ -1,0 +1,30 @@
+[
+    {
+    
+      "movieId": "the-avengers",
+      "description": "Earth's Mightiest Heroes stand as the planet's first line of defense against the most powerful threats in the universe. The Avengers began as a group of extraordinary individuals who were assembled to defeat Loki and his Chitauri army in New York City.",
+      "imageSrc": "./images/the-avengers.jpg",
+      "runTime": "2h 23m",
+      "rating": "PG-13",
+      "year": "2012"
+    },
+
+    {
+        "movieId": "inception",
+        "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
+        "imageSrc": "./images/inception.jpg",
+        "runTime": "2h 28m",
+        "rating": "PG-13",
+        "year": "2010"
+    },
+
+    {
+        "movieId": "scarface",
+        "description": "The story of Cuban refugee Tony Montana (Al Pacino), who arrives penniless in Miami during the Mariel boatlift and becomes a powerful and extremely homicidal drug lord.",
+        "imageSrc": "./images/scarface.jpg",
+        "runTime": "2h 50m",
+        "rating": "R",
+        "year": "1983"
+    }
+
+  ]
