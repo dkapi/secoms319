@@ -8,7 +8,9 @@
       "rating": "PG-13",
       "year": "2012",
       "review":"An Action Packed series of heros and villians, truly one of the history books",
-      "review2": "i've read the comics since i was a kid and this was an amazing experience being able to watch in theatre"
+      "review2": "i've read the comics since i was a kid and this was an amazing experience being able to watch in theatre",
+      "reviewAuthor": "- John doe",
+      "review2Author": "- Michael Jackson"
     },
 
     {
@@ -19,7 +21,9 @@
         "rating": "PG-13",
         "year": "2010",
         "review": "once again Leonardo DiCaprio delivers, he played a jaw dropping performance as Dream Thief Dom Cobb",
-        "review2": "A riviting and complex screen play, as you watch you begin to have so many questions about why Cobb keeps her in his dreams, but as you pay attention to the flow of the movie and the scenery you begin to find the answers, truly a wonderful film"
+        "review2": "A riviting and complex screen play, as you watch you begin to have so many questions about why Cobb keeps her in his dreams, but as you pay attention to the flow of the movie and the scenery you begin to find the answers, truly a wonderful film",
+        "reviewAuthor": "- Anbu Krishnan",
+      "review2Author": "- Michael Jordan"
     },
 
     {
@@ -30,7 +34,9 @@
         "rating": "R",
         "year": "1983",
         "review": "One of the greatest gangster movies to hit the screens yet, even 20 years later this movie has a massive cult following",
-        "review2": "Possibly one of the best Gangster movies to ever be made, Al Pacino played his character beautifuly"
+        "review2": "Possibly one of the best Gangster movies to ever be made, Al Pacino played his character beautifuly",
+        "reviewAuthor": "- A.K",
+        "review2Author": "- Jeff Johnson"
     }
 
   ]
