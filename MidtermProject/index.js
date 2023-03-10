@@ -43,3 +43,27 @@ fetch('./data.json')
        });
      });
    });
+
+   const moviesReviewContainer = document.getElementById('reviews');
+
+   fetch('./data.json')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(review => {
+        const reviewCard = `
+        <div class = "col">
+          <div class = "card shadow-sm">
+           <img src ="${review.imageSrc}" alt = "${review.movieId}">
+           <div class ="card-body">
+            <p class = "card-text">${movie.review}</p>
+            <div class ="d-flex justify-content-between align-items-center">
+              <div class = "btn-group">
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+        moviesReviewContainer.insertAdjacentHTML('beforeend', reviewCard);
+        const image = moviesReviewContainer.querySelector(`img[alt ="${movie.movieId}"]`);
+      });
+    });
