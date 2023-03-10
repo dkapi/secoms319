@@ -24,7 +24,22 @@ fetch('./data.json')
           </div>
         </div>
       `;
-      // Add the movie card to the movies container
-      moviesContainer.insertAdjacentHTML('beforeend', movieCard);
-    });
-  });
+       // Add the movie card to the movies container
+       moviesContainer.insertAdjacentHTML('beforeend', movieCard);
+
+       // Add event listener to image element
+       const image = moviesContainer.querySelector(`img[alt="${movie.movieId}"]`);
+       image.addEventListener('mouseenter', () => {
+         // Change cursor to hand
+         image.style.cursor = 'pointer';
+       });
+       image.addEventListener('mouseleave', () => {
+         // Change cursor back to default
+         image.style.cursor = 'default';
+       });
+       image.addEventListener('click', () => {
+         // Redirect to review page
+         window.location.href = `./index2.html`;
+       });
+     });
+   });
