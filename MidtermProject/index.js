@@ -68,5 +68,5 @@ fetch('./data.json')
       `;
       moviesReviewContainer.insertAdjacentHTML('beforeend', reviewCard);
       const image = moviesReviewContainer.querySelector(`img[alt="${review.movieId}"]`);
-    });
+    }); 
   });
