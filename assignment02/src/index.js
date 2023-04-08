@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     setProducts(data)
@@ -20,10 +21,25 @@ function App() {
     });
   };
 
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="container">
+      <div className="row">
+        <div className="col">
+          <form className="d-flex">
+            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                   value={searchTerm}
+                   onChange={event => setSearchTerm(event.target.value)} />
+            <button className="btn btn-outline-success" type="submit">Search</button>
+            <button className="btn btn-outline-danger" type="button" onClick={() => setSearchTerm("")}>Clear</button>
+          </form>
+        </div>
+      </div>
       <div className="row row-cols-1 row-cols-md-3 g-4">
-        {products.map(product => (
+        {filteredProducts.map(product => (
           <div key={product.id} className="col">
             <div className="card h-100">
               <img src={product.image} className="card-img-top" alt={product.name} style={{ height: "250px", width: "300px", objectFit: "cover", display: "block", margin: "0 auto"  }} />
@@ -50,3 +66,4 @@ function App() {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
