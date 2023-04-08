@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Blender",
+    "image": "/images/blender.jpg",
+    "price": 10.99,
+    "description": "A Kitchen appliance used for mixing, pureeing, or emulsifying food and other substances. It consists of a motor-driven base with a rotating blade at the bottom of a container, which is used to blend the ingredients. Blenders are commonly used for making smoothies, sauces, soups, and other food items that require a smooth, uniform texture."
+  },
+  {
+    "id": 2,
+    "name": "Coffee Maker",
+    "image": "/images/coffee-maker.jpg",
+    "price": 15.99,
+    "description": "An electric appliance that brews coffee by passing hot water through ground coffee beans. There are many different types of coffee makers available, ranging from simple drip coffee makers to more advanced models that can grind coffee beans and make espresso. Coffee makers are a must-have appliance for coffee lovers."
+  },
+  {
+    "id": 3,
+    "name": "Cutting Board",
+    "image": "/images/cutting-board.jpg",
+    "price": 12.99,
+    "description": " A cutting board is a flat surface used for cutting and preparing food. Cutting boards are essential kitchen tools that protect your countertop and help keep your knives sharp. They are also hygienic, as they can be easily cleaned and sanitized. "
+  },
+  {
+    "id": 4,
+    "name": "Knives",
+    "image": "/images/knives.jpg",
+    "price": 9.99,
+    "description": " Knives are sharp-edged cutting tools used for preparing food. Knives are an essential tool in any kitchen and can make food preparation much easier and more efficient. "
+  },
+  {
+    "id": 5,
+    "name": "Pan",
+    "image": "/images/pan.jpg",
+    "price": 20.99,
+    "description": "A pan is a flat-bottomed cooking vessel used for frying, sautéing, and searing food. Pans are a versatile kitchen tool that can be used for a wide range of cooking tasks. "
+  },
+  {
+    "id": 6,
+    "name": "Pot",
+    "image": "/images/pot.jpg",
+    "price": 8.99,
+    "description": "A pot is a deep, round cooking vessel used for boiling, simmering, and stewing food. They often have a lid to help retain heat and moisture while cooking. Pots are a kitchen staple and are used for cooking everything from pasta to soup to chili."
+  }
+]
