@@ -42,7 +42,7 @@ function App() {
         {filteredProducts.map(product => (
           <div key={product.id} className="col">
             <div className="card h-100">
-              <img src={product.image} className="card-img-top" alt={product.name} style={{ height: "250px", width: "300px", objectFit: "cover", display: "block", margin: "0 auto"  }} />
+              <img src={product.image} className="card-img-top" alt={product.name} style={{ height: "250px", width: "300px", object: "cover", display: "block", margin: "0 auto"  }} />
               <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
                 <p className="card-text">{product.description}</p>
