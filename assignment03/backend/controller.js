@@ -54,24 +54,24 @@ app.get("/listAll", async (request, response) => {
   response.send(results).status(200);
 });
 
-app.get('/products/:id', async (request, response) => {
-    const { id } = request.params;
-  
-    try {
-      await client.connect();
-      const collection = db.collection("fakestore_catalog");
-      const product = await collection.findOne({ id: parseInt(id) });
-  
-      if (product) {
-        response.status(200).send(product);
-      } else {
-        response.status(404).send({ error: 'Product not found' });
-      }
-    } catch (error) {
-      console.error('Error fetching product:', error);
-      response.status(500).send({ error: 'Error fetching product' });
+app.get("/products/:id", async (request, response) => {
+  const { id } = request.params;
+
+  try {
+    await client.connect();
+    const collection = db.collection("fakestore_catalog");
+    const product = await collection.findOne({ id: parseInt(id) });
+
+    if (product) {
+      response.status(200).send(product);
+    } else {
+      response.status(404).send({ error: "Product not found" });
     }
-  });
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    response.status(500).send({ error: "Error fetching product" });
+  }
+});
 
 app.post("/addProduct", async (req, res) => {
   try {

@@ -8,7 +8,7 @@ const AddProduct = () => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [image, setImage] = useState('');
-  const [rating, setRating] = useState('');
+  const [ratingRate, setRatingRate] = useState('');
   const [ratingCount, setRatingCount] = useState('');
 
   const handleSubmit = async (e) => {
@@ -21,13 +21,15 @@ const AddProduct = () => {
       description: description,
       category: category,
       image: image,
-      rating: rating,
-      ratingCount: ratingCount
+      rating: {
+        rate: parseFloat(ratingRate),
+        count: parseInt(ratingCount)
+      },
     };
 
     try {
-      const response = await axios.post('http://localhost:8081/addProduct', [newProduct]);
-      if (response.status === 200) {
+      const response = await axios.post('http://localhost:8081/addProduct', newProduct);
+      if (response.status === 201) {
         alert('Product added successfully');
       } else {
         alert('Error adding product');
@@ -47,7 +49,7 @@ const AddProduct = () => {
         <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
         <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
         <input type="text" placeholder="Image URL" value={image} onChange={(e) => setImage(e.target.value)} />
-        <input type="text" placeholder="Rating" value={rating} onChange={(e) => setRating(e.target.value)} />
+        <input type="text" placeholder="Rating" value={ratingRate} onChange={(e) => setRatingRate(e.target.value)} />
         <input type="text" placeholder="Rating Count" value={ratingCount} onChange={(e) => setRatingCount(e.target.value)} />
         <button type="submit" className="btn btn-primary">Add Product</button>
       </form>
