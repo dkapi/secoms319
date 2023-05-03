@@ -1,45 +1,36 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 const AddProduct = () => {
-  const [formData, setFormData] = useState({
-    _id: '',
-    title: '',
-    price: '',
-    description: '',
-    category: '',
-    image: '',
-    rating: {
-      rate: '',
-      count: '',
-    },
-  });
+  const [id, setId] = useState('');
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [image, setImage] = useState('');
+  const [rating, setRating] = useState('');
+  const [ratingCount, setRatingCount] = useState('');
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    if (name === 'rate' || name === 'count') {
-      setFormData({
-        ...formData,
-        rating: {
-          ...formData.rating,
-          [name]: value,
-        },
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+    const newProduct = {
+      id: id,
+      title: title,
+      price: price,
+      description: description,
+      category: category,
+      image: image,
+      rating: rating,
+      ratingCount: ratingCount
+    };
+
     try {
-      const response = await axios.post('http://localhost:5000/api/products', formData);
-      if (response.status === 201) {
+      const response = await axios.post('http://localhost:8081/addProduct', [newProduct]);
+      if (response.status === 200) {
         alert('Product added successfully');
+      } else {
+        alert('Error adding product');
       }
     } catch (error) {
       console.error('Error adding product:', error);
@@ -47,98 +38,20 @@ const AddProduct = () => {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <h1>Add Product</h1>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label>_id</Form.Label>
-              <Form.Control
-                type="text"
-                name="_id"
-                value={formData._id}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                type="number"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="text"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Image URL</Form.Label>
-              <Form.Control
-                type="text"
-                name="image"
-                value={formData.image}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Rating - Rate</Form.Label>
-              <Form.Control
-                type="number"
-                name="rate"
-                value={formData.rating.rate}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Rating - Count</Form.Label>
-              <Form.Control
-                type="number"
-                name="count"
-                value={formData.rating.count}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Add Product
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <div className="container">
+      <h1>Add Product</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="ID" value={id} onChange={(e) => setId(e.target.value)} />
+        <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input type="text" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
+        <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
+        <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+        <input type="text" placeholder="Image URL" value={image} onChange={(e) => setImage(e.target.value)} />
+        <input type="text" placeholder="Rating" value={rating} onChange={(e) => setRating(e.target.value)} />
+        <input type="text" placeholder="Rating Count" value={ratingCount} onChange={(e) => setRatingCount(e.target.value)} />
+        <button type="submit" className="btn btn-primary">Add Product</button>
+      </form>
+    </div>
   );
 };
 

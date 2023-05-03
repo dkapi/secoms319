@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 const UpdateProduct = () => {
-  const [productId, setProductId] = useState('');
   const [product, setProduct] = useState(null);
   const [newPrice, setNewPrice] = useState('');
+  const productIdRef = useRef('');
 
   const fetchProduct = async (id) => {
+    console.log(`fetching product with id ${id}`);
     try {
-      const response = await axios.get(`http://localhost:5000/api/products/${id}`);
-      setProduct(response.data);
+      const response = await axios.get(`http://localhost:8081/products/${id}`);
+      if (response.status === 200) {
+        setProduct(response.data);
+      }
     } catch (error) {
       console.error('Error fetching product:', error);
     }
@@ -18,7 +21,10 @@ const UpdateProduct = () => {
 
   const handleIdSubmit = (event) => {
     event.preventDefault();
-    fetchProduct(productId);
+    const productId = productIdRef.current.value.trim();
+    if (productId) {
+      fetchProduct(productId);
+    }
   };
 
   const handlePriceChange = (event) => {
@@ -27,13 +33,19 @@ const UpdateProduct = () => {
 
   const handleUpdateSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.put(`http://localhost:5000/api/products/${productId}`, { price: newPrice });
-      if (response.status === 200) {
-        alert('Product updated successfully');
+    const productId = productIdRef.current.value.trim();
+    if (newPrice !== product.price) {
+      try {
+        const response = await axios.put(`http://localhost:8081/update/${productId}`, { price: newPrice });
+        if (response.status === 200) {
+          alert('Product updated successfully');
+          fetchProduct(productId);
+        }
+      } catch (error) {
+        console.error('Error updating product:', error);
       }
-    } catch (error) {
-      console.error('Error updating product:', error);
+    } else {
+      alert('New price is the same as the current price. No changes made.');
     }
   };
 
@@ -53,8 +65,7 @@ const UpdateProduct = () => {
               <Form.Label>Product ID</Form.Label>
               <Form.Control
                 type="text"
-                value={productId}
-                onChange={(event) => setProductId(event.target.value)}
+                ref={productIdRef}
                 required
               />
             </Form.Group>
@@ -79,7 +90,12 @@ const UpdateProduct = () => {
               </Form.Group>
               <Form.Group>
                 <Form.Label>New Price</Form.Label>
-                <Form.Control type="number" value={newPrice} onChange={handlePriceChange} required />
+                <Form.Control
+                  type="number"
+                  value={newPrice}
+                  onChange={handlePriceChange}
+                  required
+                />
               </Form.Group>
               <Button variant="primary" type="submit">
                 Update Price

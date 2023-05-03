@@ -9,8 +9,8 @@ const Credits = () => {
           <h1 className="mb-4">Team Information</h1>
           <h2 className="mb-4">Course Number: Com S 319 Section 2</h2>
           <h2 className="mb-4">Course Name: Construction of User Interfaces</h2>
-          <h2 className="mb-4">Professor: Abraham Aldaco</h2>
-          <h2 className="mb-4">Date: April 30, 2023</h2>
+          <h3 className="mb-4">Professor: Abraham Aldaco</h3>
+          <h3 className="mb-4">Date: April 30, 2023</h3>
           <p className="lead mb-4">
             This project is a MERN application developed by our team to showcase our skills in MongoDB, Express, React,
             and Node.js. The application allows users to manage a product catalog, including adding, viewing, updating,
