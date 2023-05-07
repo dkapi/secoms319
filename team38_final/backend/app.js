@@ -7,6 +7,7 @@ var mongoose = require("mongoose");
 const app = express();
 const port = 8081;
 const host = "localhost";
+app.use('/images', express.static('images'));
 
 app.use(cors());
 app.use(express.json());
@@ -22,7 +23,7 @@ const uri = "mongodb://127.0.0.1:27017";
 const dbName = "reactdata";
 const client = new MongoClient(uri);
 const db = client.db(dbName);
-const products = db.collection("movie_catalog");
+conss = db.collection("movie_catalog");
 
 async function main() {
   try {
@@ -59,17 +60,41 @@ app.get("/listAll", async (request, response) => {
   
     try {
       await client.connect();
-      const collection = db.collection("fakestore_catalog");
-      const product = await collection.findOne({ id: parseInt(id) });
+      const collection = db.collection("movie_catalog");
+      const movie = await collection.findOne({ id: parseInt(id) });
   
-      if (product) {
-        response.status(200).send(product);
+      if (movie) {
+        response.status(200).send(movie);
       } else {
         response.status(404).send({ error: "Movie not found" });
       }
     } catch (error) {
       console.error("Error fetching movie:", error);
       response.status(500).send({ error: "Error fetching Movie" });
+    }
+  });
+
+  app.post("/addMovie", async (req, res) => {
+    try {
+      const { id, title, description, category, image, price, rating } = req.body;
+      const movie = {
+        id: parseInt(id),
+        title,
+        description,
+        category,
+        image,
+        price: parseFloat(price),
+        rating: {
+          rate: parseFloat(rating.rate),
+          count: parseInt(rating.count),
+        },
+      };
+      const result = await db.collection("movie_catalog").insertOne(movie);
+      console.log(`Movie added with ID: ${result.insertedId}`);
+      res.sendStatus(201);
+    } catch (error) {
+      console.error("Error adding movie:", error);
+      res.sendStatus(500);
     }
   });
 
@@ -102,14 +127,14 @@ app.get("/listAll", async (request, response) => {
     try {
       await client.connect();
       const collection = db.collection("movie_catalog");
-      const updatedProduct = await collection.findOneAndUpdate(
+      const updatedMovie = await collection.findOneAndUpdate(
         { id: parseInt(id) },
         { $set: { price: parseFloat(price) } },
         { returnOriginal: false }
       );
   
-      if (updatedProduct.value) {
-        response.status(200).send(updatedProduct.value);
+      if (updatedMovie.value) {
+        response.status(200).send(updatedMovie.value);
       } else {
         response.status(404).send({ error: "Movie not found" });
       }

@@ -11,5 +11,5 @@ const ReactFormDataSchema = new mongoose.Schema(
   },
   { collection: "movie_catalog" }
 );
-const Product = mongoose.model("Product", ReactFormDataSchema);
-module.exports = Product;
+const Movie = mongoose.model("Movie", ReactFormDataSchema);
+module.exports = Movie;

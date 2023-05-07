@@ -10,11 +10,9 @@ const Credits = () => {
           <h2 className="mb-4">Course Number: Com S 319 Section 2</h2>
           <h2 className="mb-4">Course Name: Construction of User Interfaces</h2>
           <h3 className="mb-4">Professor: Abraham Aldaco</h3>
-          <h3 className="mb-4">Date: April 30, 2023</h3>
+          <h3 className="mb-4">Date: May 4, 2023</h3>
           <p className="lead mb-4">
-            This project is a MERN application developed by our team to showcase our skills in MongoDB, Express, React,
-            and Node.js. The application allows users to manage a product catalog, including adding, viewing, updating,
-            and deleting products. We have used the "https://fakestoreapi.com/products" API for product data.
+            A Movie Catalog webpage where you can look at selected movies, add your favorite movies, delete them, and even update them. TODO: Add a add reviews view
           </p>
           <h2 className="mb-4">Team Members:</h2>
           <ul className="list-unstyled mb-4">

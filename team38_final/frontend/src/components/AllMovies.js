@@ -47,31 +47,34 @@ const AllMovies = () => {
       </div>
       {showMovies && (
         <div className="row">
-          {movies.map((movie) => (
-            <div className="col-md-4" key={movie._id}>
-              <div className="card mb-4" style={cardStyle}>
-                <img
-                  src={movie.image}
-                  alt={movie.title}
-                  className="card-img-top"
-                  style={cardImgStyle}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{movie.title}</h5>
-                  <p className="card-text">{movie.description}</p>
-                  <p className="card-text">
-                    Category: {movie.category}
-                  </p>
-                  <p className="card-text">
-                    Price: ${parseFloat(movie.price).toFixed(2)}
-                  </p>
-                  <p className="card-text">
-                    Rating: {parseFloat(movie.rating.rate).toFixed(1)} ({movie.rating.count} reviews)
-                  </p>
+          {movies.map((movie) => {
+            const imageUrl = `http://localhost:8081/images/${movie.image}`;
+            return (
+              <div className="col-md-4" key={movie._id}>
+                <div className="card mb-4" style={cardStyle}>
+                  <img
+                    src={imageUrl}
+                    alt={movie.title}
+                    className="card-img-top"
+                    style={cardImgStyle}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{movie.title}</h5>
+                    <p className="card-text">{movie.description}</p>
+                    <p className="card-text">
+                      Category: {movie.category}
+                    </p>
+                    <p className="card-text">
+                      Price: ${parseFloat(movie.price).toFixed(2)}
+                    </p>
+                    <p className="card-text">
+                      Rating: {parseFloat(movie.rating.rate).toFixed(1)} ({movie.rating.count} reviews)
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

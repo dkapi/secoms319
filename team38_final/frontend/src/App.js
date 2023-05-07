@@ -9,12 +9,13 @@ import UpdateMovie from "./components/UpdateMovie";
 import DeleteMovie from "./components/DeleteMovie";
 import Credits from "./components/Credits";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <>
       <Navbar bg="light" expand="lg" className="py-4 px-5">
-        <Navbar.Brand as={Link} to="/" className="font-weight-bold">
+        <Navbar.Brand as={Link} to="/" className="font-weight-bold brand">
           ADK Movies
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

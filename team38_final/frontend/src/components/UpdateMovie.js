@@ -1,21 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 const UpdateMovie = () => {
   const [movie, setMovie] = useState(null);
-  const [newPrice, setNewPrice] = useState('');
-  const movieIdRef = useRef('');
+  const [newPrice, setNewPrice] = useState("");
+  const movieIdRef = useRef("");
 
   const fetchMovie = async (id) => {
     console.log(`fetching movie with id ${id}`);
     try {
-      const response = await axios.get(`http://localhost:8081/products/${id}`);
+      const response = await axios.get(`http://localhost:8081/movie/${id}`);
       if (response.status === 200) {
         setMovie(response.data);
       }
     } catch (error) {
-      console.error('Error fetching movie:', error);
+      console.error("Error fetching movie:", error);
     }
   };
 
@@ -36,16 +36,19 @@ const UpdateMovie = () => {
     const movieId = movieIdRef.current.value.trim();
     if (newPrice !== movie.price) {
       try {
-        const response = await axios.put(`http://localhost:8081/update/${movieId}`, { price: newPrice });
+        const response = await axios.put(
+          `http://localhost:8081/update/${movieId}`,
+          { price: newPrice }
+        );
         if (response.status === 200) {
-          alert('movie updated successfully');
+          alert("movie updated successfully");
           fetchMovie(movieId);
         }
       } catch (error) {
-        console.error('Error updating movie:', error);
+        console.error("Error updating movie:", error);
       }
     } else {
-      alert('New price is the same as the current price. No changes made.');
+      alert("New price is the same as the current price. No changes made.");
     }
   };
 
@@ -62,11 +65,11 @@ const UpdateMovie = () => {
           <h1>Update Movie</h1>
           <Form onSubmit={handleIdSubmit}>
             <Form.Group>
-              <Form.Label>Movie ID</Form.Label>
               <Form.Control
                 type="text"
                 ref={movieIdRef}
                 required
+                placeholder="Movie ID" // Added placeholder
               />
             </Form.Group>
             <Button variant="primary" type="submit">

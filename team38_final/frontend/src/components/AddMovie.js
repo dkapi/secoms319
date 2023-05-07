@@ -41,7 +41,7 @@ const AddMovie = () => {
 
   return (
     <div className="container">
-      <h1>Add Product</h1>
+      <h1>Add a Movie</h1>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="ID" value={id} onChange={(e) => setId(e.target.value)} />
         <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -51,7 +51,7 @@ const AddMovie = () => {
         <input type="text" placeholder="Image URL" value={image} onChange={(e) => setImage(e.target.value)} />
         <input type="text" placeholder="Rating" value={ratingRate} onChange={(e) => setRatingRate(e.target.value)} />
         <input type="text" placeholder="Rating Count" value={ratingCount} onChange={(e) => setRatingCount(e.target.value)} />
-        <button type="submit" className="btn btn-primary">Add Product</button>
+        <button type="submit" className="btn btn-primary">Add Movie</button>
       </form>
     </div>
   );

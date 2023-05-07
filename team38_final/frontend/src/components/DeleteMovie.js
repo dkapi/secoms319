@@ -20,7 +20,7 @@ const DeleteMovie = () => {
 
   return (
     <div className="container">
-      <h1>Delete Product</h1>
+      <h1>Delete a Movie</h1>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Movie ID" value={id} onChange={(e) => setId(e.target.value)} />
         <button className="btn btn-primary" type="submit">Delete Movie</button>
