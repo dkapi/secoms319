@@ -1,5 +1,5 @@
-import React, { useState } from "react"; // Importing React and useState hook from 'react'
-import axios from "axios"; // Importing axios library for making API requests
+import React, { useState } from "react"; 
+import axios from "axios"; 
 
 const AddMovie = () => {
   // Defining state variables and their setter functions using the useState hook
@@ -9,7 +9,6 @@ const AddMovie = () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
-
 
   // Event handler for when the user submits the form
   const handleSubmit = async (e) => {

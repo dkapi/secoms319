@@ -1,20 +1,36 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
-// Define the UpdateMovie component
 const UpdateMovie = () => {
-  // Define state variables
+  //State variables
+  const [movies, setMovies] = useState([]);
+  const [selectedMovieId, setSelectedMovieId] = useState("");
   const [movie, setMovie] = useState(null);
   const [newPrice, setNewPrice] = useState("");
   const [newDescription, setNewDescription] = useState("");
-  const movieIdRef = useRef("");
 
-  // Define a function to fetch a movie by its ID
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+
+  const fetchMovies = async () => {
+    try {
+      const response = await axios.get("http://localhost:8081/listAll");
+      if (response.status === 200) {
+        // Store the list of movies in the state variable
+        setMovies(response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    }
+  };
+
   const fetchMovie = async (id) => {
     try {
       const response = await axios.get(`http://localhost:8081/movie/${id}`);
       if (response.status === 200) {
+        // Store the details of the selected movie in the state variable
         setMovie(response.data);
       }
     } catch (error) {
@@ -22,37 +38,37 @@ const UpdateMovie = () => {
     }
   };
 
-  // Define a function to handle the form submission to fetch a movie by its ID
-  const handleIdSubmit = (event) => {
-    event.preventDefault();
-    const movieId = movieIdRef.current.value.trim();
-    if (movieId) {
-      fetchMovie(movieId);
-    }
+  const handleMovieSelect = (event) => {
+    // Update the ID of the selected movie
+    setSelectedMovieId(event.target.value);
+    // Fetch the details of the selected movie
+    fetchMovie(event.target.value);
   };
 
-  // Define functions to handle changes to the price and description fields
   const handlePriceChange = (event) => {
+    // Update the new price of the selected movie
     setNewPrice(event.target.value);
   };
 
   const handleDescriptionChange = (event) => {
+    // Update the new description of the selected movie
     setNewDescription(event.target.value);
   };
 
-  // Define a function to handle the form submission to update the movie's price and description
   const handleUpdateSubmit = async (event) => {
     event.preventDefault();
-    const movieId = movieIdRef.current.value.trim();
+    // Check if the new price or description is different from the current one
     if (newPrice !== movie.price || newDescription !== movie.description) {
       try {
         const response = await axios.put(
-          `http://localhost:8081/update/${movieId}`,
+          `http://localhost:8081/update/${selectedMovieId}`,
+          // Update the selected movie with the new price and description
           { price: newPrice, description: newDescription }
         );
         if (response.status === 200) {
           alert("Movie updated successfully");
-          fetchMovie(movieId);
+          // Fetch the updated details of the selected movie
+          fetchMovie(selectedMovieId);
         }
       } catch (error) {
         console.error("Error updating movie:", error);
@@ -62,33 +78,35 @@ const UpdateMovie = () => {
     }
   };
 
-  // Define an effect hook to set the initial values for the newPrice and newDescription fields when a movie is fetched
   useEffect(() => {
     if (movie) {
+      // Set the new price to the current price of the selected movie
       setNewPrice(movie.price);
+      // Set the new description to the current description of the selected movie
       setNewDescription(movie.description);
     }
   }, [movie]);
 
-  // Render the UpdateMovie component
   return (
     <Container>
       <Row>
         <Col>
           <h1>Update Movie</h1>
-          <Form onSubmit={handleIdSubmit}>
-            <Form.Group>
-              <Form.Control
-                type="text"
-                ref={movieIdRef}
-                required
-                placeholder="Movie ID"
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Fetch Movie
-            </Button>
-          </Form>
+          <Form.Group>
+            <Form.Control
+              as="select"
+              value={selectedMovieId}
+              onChange={handleMovieSelect}
+              required
+            >
+              <option value="">Select a movie</option>
+              {movies.map((movie) => (
+                <option key={movie.id} value={movie.id}>
+                  {movie.title}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
         </Col>
       </Row>
       {movie && (
@@ -133,7 +151,7 @@ const UpdateMovie = () => {
                 />
               </Form.Group>
               <Button variant="primary" type="submit">
-                Update Price and Description
+                Update Movie
               </Button>
             </Form>
           </Col>
@@ -143,5 +161,4 @@ const UpdateMovie = () => {
   );
 };
 
-// Export the UpdateMovie component
 export default UpdateMovie;

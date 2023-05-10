@@ -86,20 +86,20 @@ app.get("/movie/:id", async (request, response) => {
 // Define a route to add a new movie to the database
 app.post("/addMovie", async (req, res) => {
   try {
-    const { id, title, description, category, image, price, rating } = req.body;
-    const movie = {
+    const { id, title, description, category, image, price } = req.body;
+
+    const newMovie = {
       id: parseInt(id),
       title,
       description,
       category,
       image,
       price: parseFloat(price),
-      rating: {
-        rate: parseFloat(rating.rate),
-        count: parseInt(rating.count),
-      },
     };
-    const result = await collection.insertOne(movie);
+
+    await client.connect();
+    const result = await collection.insertOne(newMovie);
+
     console.log(`Movie added with ID: ${result.insertedId}`);
     res.sendStatus(201);
   } catch (error) {
@@ -107,6 +107,9 @@ app.post("/addMovie", async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+
+
 
 // Define a route to delete a movie by ID
 app.delete("/deleteMovie/:id", async (req, res) => {

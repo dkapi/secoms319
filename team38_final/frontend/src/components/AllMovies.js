@@ -36,8 +36,9 @@ const AllMovies = () => {
   };
 
   const cardImgStyle = {
-    maxHeight: "250px",
-    objectFit: "cover",
+    height: "450px",
+    width: "100%",
+    objectFit: "contain",
   };
 
   // Render component

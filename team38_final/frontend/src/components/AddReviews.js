@@ -11,10 +11,12 @@ const AddReview = () => {
   const [rating, setRating] = useState(1);
   const [message, setMessage] = useState("");
 
+  //Fetch all movies on component
   useEffect(() => {
     fetchMovies();
   }, []);
 
+  //Fetches all movies from the server
   const fetchMovies = async () => {
     try {
       const response = await axios.get("http://localhost:8081/listAll");
@@ -26,6 +28,7 @@ const AddReview = () => {
     }
   };
 
+  //Handles form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!selectedMovieId || !username || !comment) {
@@ -34,11 +37,13 @@ const AddReview = () => {
     }
 
     try {
+      // Send a POST request to add a new review for the selected movie
       const response = await axios.post(
         `http://localhost:8081/addReview/${selectedMovieId}`,
         { user: username, comment, rating }
       );
 
+      // Display a success message and reset the form fields if the request is successful
       if (response.status === 200) {
         setMessage("Review submitted successfully!");
         setUsername("");
@@ -52,6 +57,7 @@ const AddReview = () => {
     }
   };
 
+  // The render method
   return (
     <div className="container">
       <h1 className="text-center my-4">Add Review</h1>
