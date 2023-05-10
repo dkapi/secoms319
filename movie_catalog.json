@@ -1,0 +1,57 @@
+[{
+  "_id": {
+    "$oid": "6456f39b0f19a3c0e1014f9e"
+  },
+  "id": 1,
+  "title": "The Shawshank Redemption",
+  "price": 11.99,
+  "description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+  "category": "Drama",
+  "image": "SSR.jpg",
+  "rating": {
+    "rate": 9.3,
+    "count": 2423456
+  }
+},{
+  "_id": {
+    "$oid": "6456f39b0f19a3c0e1014f9f"
+  },
+  "id": 2,
+  "title": "The Godfather",
+  "price": 12.99,
+  "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+  "category": "Crime",
+  "image": "TGF.jpg",
+  "rating": {
+    "rate": 9.2,
+    "count": 1673456
+  }
+},{
+  "_id": {
+    "$oid": "6456f39b0f19a3c0e1014fa0"
+  },
+  "id": 3,
+  "title": "Pulp Fiction",
+  "price": 11.99,
+  "description": "The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+  "category": "Crime",
+  "image": "PF.jpg",
+  "rating": {
+    "rate": 8.9,
+    "count": 1902345
+  }
+},{
+  "_id": {
+    "$oid": "6456f39b0f19a3c0e1014fa1"
+  },
+  "id": 4,
+  "title": "Inception",
+  "price": 8.99,
+  "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+  "category": "Sci-Fi",
+  "image": "Inception.jpg",
+  "rating": {
+    "rate": 8.8,
+    "count": 2167890
+  }
+}]

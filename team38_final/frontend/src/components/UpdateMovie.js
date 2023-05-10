@@ -2,13 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
+// Define the UpdateMovie component
 const UpdateMovie = () => {
+  // Define state variables
   const [movie, setMovie] = useState(null);
   const [newPrice, setNewPrice] = useState("");
+  const [newDescription, setNewDescription] = useState("");
   const movieIdRef = useRef("");
 
+  // Define a function to fetch a movie by its ID
   const fetchMovie = async (id) => {
-    console.log(`fetching movie with id ${id}`);
     try {
       const response = await axios.get(`http://localhost:8081/movie/${id}`);
       if (response.status === 200) {
@@ -19,6 +22,7 @@ const UpdateMovie = () => {
     }
   };
 
+  // Define a function to handle the form submission to fetch a movie by its ID
   const handleIdSubmit = (event) => {
     event.preventDefault();
     const movieId = movieIdRef.current.value.trim();
@@ -27,37 +31,46 @@ const UpdateMovie = () => {
     }
   };
 
+  // Define functions to handle changes to the price and description fields
   const handlePriceChange = (event) => {
     setNewPrice(event.target.value);
   };
 
+  const handleDescriptionChange = (event) => {
+    setNewDescription(event.target.value);
+  };
+
+  // Define a function to handle the form submission to update the movie's price and description
   const handleUpdateSubmit = async (event) => {
     event.preventDefault();
     const movieId = movieIdRef.current.value.trim();
-    if (newPrice !== movie.price) {
+    if (newPrice !== movie.price || newDescription !== movie.description) {
       try {
         const response = await axios.put(
           `http://localhost:8081/update/${movieId}`,
-          { price: newPrice }
+          { price: newPrice, description: newDescription }
         );
         if (response.status === 200) {
-          alert("movie updated successfully");
+          alert("Movie updated successfully");
           fetchMovie(movieId);
         }
       } catch (error) {
         console.error("Error updating movie:", error);
       }
     } else {
-      alert("New price is the same as the current price. No changes made.");
+      alert("No changes made to the price or description.");
     }
   };
 
+  // Define an effect hook to set the initial values for the newPrice and newDescription fields when a movie is fetched
   useEffect(() => {
     if (movie) {
       setNewPrice(movie.price);
+      setNewDescription(movie.description);
     }
   }, [movie]);
 
+  // Render the UpdateMovie component
   return (
     <Container>
       <Row>
@@ -69,7 +82,7 @@ const UpdateMovie = () => {
                 type="text"
                 ref={movieIdRef}
                 required
-                placeholder="Movie ID" // Added placeholder
+                placeholder="Movie ID"
               />
             </Form.Group>
             <Button variant="primary" type="submit">
@@ -81,7 +94,7 @@ const UpdateMovie = () => {
       {movie && (
         <Row>
           <Col>
-            <h2>Update Price</h2>
+            <h2>Update Price and Description</h2>
             <Form onSubmit={handleUpdateSubmit}>
               <Form.Group>
                 <Form.Label>Title</Form.Label>
@@ -100,8 +113,27 @@ const UpdateMovie = () => {
                   required
                 />
               </Form.Group>
+              <Form.Group>
+                <Form.Label>Current Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  value={movie.description}
+                  readOnly
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>New Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  value={newDescription}
+                  onChange={handleDescriptionChange}
+                  required
+                />
+              </Form.Group>
               <Button variant="primary" type="submit">
-                Update Price
+                Update Price and Description
               </Button>
             </Form>
           </Col>
@@ -111,4 +143,5 @@ const UpdateMovie = () => {
   );
 };
 
+// Export the UpdateMovie component
 export default UpdateMovie;
